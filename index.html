@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Janu Bacha</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'Arial', sans-serif; overflow: hidden; min-height: 100vh; }
+
+        /* ==================== MAIN SCREEN ==================== */
+        #mainScreen {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            width: 100%; height: 100vh;
+            background-color: #ffdde1;
+            background-image: url('/pic/f9887ef15eb215f213c85ca70c662368.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            text-align: center;
+            position: relative;
+        }
+        #mainScreen::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.48); z-index: 1;
+        }
+        #mainScreen > * { position: relative; z-index: 2; }
+
+        #mainScreen h1 {
+            color: white; font-size: 2.2rem; margin-bottom: 50px;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .buttons { display: flex; gap: 25px; }
+        button {
+            width: 140px; height: 60px; font-size: 1.35rem; border: none;
+            border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;
+        }
+        #yesBtn { background-color: #28a745; color: white; }
+        #yesBtn:hover { transform: scale(1.08); }
+        #noBtn { background-color: #dc3545; color: white; position: relative; transition: all 0.3s ease-out; }
+
+        /* ==================== SUCCESS SCREEN ==================== */
+        #successScreen {
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #ff69b4; color: white; text-align: center;
+            padding: 20px; overflow-y: auto; z-index: 100;
+        }
+
+        #successScreen h1 { font-size: 2.3rem; margin-bottom: 25px; }
+
+        #successScreen .message {
+            font-size: 1.45rem; line-height: 1.8; max-width: 90%; margin: 0 auto 40px auto;
+            font-weight: 400; text-align: center; white-space: pre-line;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #successScreen .gallery-title {
+            font-size: 1.8rem; color: white; margin: 30px 0 30px 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #successScreen .gallery {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; max-width: 1000px;
+            margin-bottom: 50px;
+        }
+
+        #successScreen .gallery-item img {
+            width: 160px; height: 210px; object-fit: cover; border-radius: 12px;
+            border: 4px solid white; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ==================== CAT SCREEN (Improved) ==================== */
+        #catScreen {
+            display: none; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background-color: #000000;
+            color: #ff3333;
+            text-align: center;
+            z-index: 200;
+            padding: 20px;
+        }
+
+        #catScreen h1 {
+            font-size: 2.6rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(255, 50, 50, 0.8);
+            line-height: 1.3;
+        }
+
+        #catImg {
+            width: 85%;
+            max-width: 420px;
+            border-radius: 25px;
+            border: 8px solid #ff3333;
+            box-shadow: 0 10px 40px rgba(255, 50, 50, 0.7);
+            margin-bottom: 30px;
+        }
+
+        #catScreen p {
+            font-size: 1.4rem;
+            max-width: 80%;
+            color: #ff9999;
+            line-height: 1.6;
+        }
+
+        /* Footer - Success Screen */
+        .footer-social {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-item:hover {
+            transform: translateY(-3px);
+            color: #fff44f;
+        }
+
+        .social-item i {
+            font-size: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- MAIN SCREEN -->
+    <div id="mainScreen">
+        <h1>Ap Meray ko miss karo gye na 👉🏻👈🏻 🥺</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div id="successScreen">
+        <h1>Meko pta tha ap karo gee januu ho ap ❤️</h1>
+        
+        <div class="message">
+Koi bat nahi mera bacha me bhot jaldi wapis a jawon ga na ap kay pass, 
+ap to jan hen hamri ham ap kesay bhol sakty hun 
+❤️ i love you jan ❤️
+❤️ janu bacha mera ❤️
+        </div>
+
+        <h2 class="gallery-title">Ye Hay Mera Janu Bacha Sexey Sa 💕</h2>
+
+        <div class="gallery">
+            <div class="gallery-item"><img src="/pic/b1.jpg" onerror="this.src='us1.jpg'" alt="Us 1"></div>
+            <div class="gallery-item"><img src="/pic/b2.jpg" onerror="this.src='us2.jpg'" alt="Us 2"></div>
+            <div class="gallery-item"><img src="/pic/b3.jpg" onerror="this.src='us3.jpg'" alt="Us 3"></div>
+            <div class="gallery-item"><img src="/pic/b4.jpg" onerror="this.src='us4.jpg'" alt="Us 4"></div>
+            <div class="gallery-item"><img src="/pic/b5.jpg" onerror="this.src='us5.jpg'" alt="Us 5"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-social">
+            <div class="social-row">
+                <a href="https://www.instagram.com/he_.r.man/" target="_blank" class="social-item">
+                    <i class="fab fa-instagram"></i>
+                    Instagram  (Agar ap ko meri yad aye to is ID me hamri chat hen wo par lena)
+                </a>
+                <a href="https://www.snapchat.com/add/why_me2130" target="_blank" class="social-item">
+                    <i class="fab fa-snapchat-ghost"></i>
+                    Snapchat  (Agar ap ko mujhe dekhne ka dil kare to is Snap ID me Hamari pics dekh lena)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAT SCREEN - Ab achhe se styled -->
+    <div id="catScreen">
+        <h1>Bandri ❤️<br>Stop messing with me 😼</h1>
+        <img id="catImg" src="/pic/cat.png" alt="Cat with Gun">
+        <p>Nuno Dall Du Ga 😾</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainScreen = document.getElementById('mainScreen');
+        const successScreen = document.getElementById('successScreen');
+        const catScreen = document.getElementById('catScreen');
+
+        let timerRunning = false;
+        let timerId = null;
+        let mobileClickCount = 0;
+
+        function isMobile() { return window.innerWidth <= 768; }
+
+        function handleInteraction(e) {
+            if (isMobile()) {
+                if (e.type === 'mouseenter') return;
+                e.preventDefault();
+                mobileClickCount++;
+                if (mobileClickCount >= 3) showCat();
+                else {
+                    yesBtn.style.transform = `scale(${1 + mobileClickCount * 0.4})`;
+                    noBtn.style.transform = `scale(${1 - mobileClickCount * 0.2})`;
+                }
+            } else {
+                moveButtonSmoothly();
+            }
+        }
+
+        function moveButtonSmoothly() {
+            if (!timerRunning) {
+                timerRunning = true;
+                timerId = setTimeout(showCat, 10000);
+            }
+            if (noBtn.style.position !== 'fixed') {
+                const rect = noBtn.getBoundingClientRect();
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = rect.left + 'px';
+                noBtn.style.top = rect.top + 'px';
+            }
+            const currentLeft = parseFloat(noBtn.style.left) || 0;
+            const currentTop = parseFloat(noBtn.style.top) || 0;
+            const minJump = 100, maxJump = 250;
+            const dirX = Math.random() < 0.5 ? -1 : 1;
+            const dirY = Math.random() < 0.5 ? -1 : 1;
+            let moveX = (minJump + Math.random() * (maxJump - minJump)) * dirX;
+            let moveY = (minJump + Math.random() * (maxJump - minJump)) * dirY;
+            let newX = currentLeft + moveX;
+            let newY = currentTop + moveY;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const pad = 20;
+            if (newX < pad) newX = window.innerWidth - btnWidth - pad;
+            if (newX + btnWidth > window.innerWidth - pad) newX = pad;
+            if (newY < pad) newY = window.innerHeight - btnHeight - pad;
+            if (newY + btnHeight > window.innerHeight - pad) newY = pad;
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+        }
+
+        noBtn.addEventListener('mouseenter', handleInteraction);
+        noBtn.addEventListener('click', handleInteraction);
+        noBtn.addEventListener('touchstart', handleInteraction);
+
+        yesBtn.addEventListener('click', () => {
+            if (timerId) clearTimeout(timerId);
+            mainScreen.style.display = 'none';
+            successScreen.style.display = 'flex';
+        });
+
+        function showCat() {
+            if (successScreen.style.display !== 'flex') {
+                mainScreen.style.display = 'none';
+                catScreen.style.display = 'flex';
+                setTimeout(resetGame, 5000);
+            }
+        }
+
+        function resetGame() {
+            catScreen.style.display = 'none';
+            mainScreen.style.display = 'flex';
+            timerRunning = false;
+            mobileClickCount = 0;
+            if (timerId) clearTimeout(timerId);
+            noBtn.style.position = 'relative';
+            noBtn.style.left = 'auto';
+            noBtn.style.top = 'auto';
+            noBtn.style.transform = 'scale(1)';
+            yesBtn.style.transform = 'scale(1)';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
